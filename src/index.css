@@ -100,25 +100,47 @@
 }
 
 html {
-  font-size: 62.5%;
+  font-size: 62.5%; /* 1rem = 10px */
 }
 
+/* ==================================================
+   BACKGROUND PRO (SIN "background-attachment: fixed")
+   ==================================================
+   IMPORTANTE:
+   - En móviles, background-attachment: fixed es inestable (tiembla / se mueve).
+   - La solución PRO es renderizar el fondo en un pseudo-elemento FIXED.
+   - Así el contenido scrollea, pero el fondo nunca se mueve.
+*/
+
 /* ===========================
-   BODY – BACKGROUND DESKTOP
+   BODY – BASE
    =========================== */
 body {
   font-family: var(--font-family-base);
   line-height: 1.5;
   color: var(--color-text-main);
 
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ===========================
+   FONDO REAL (FIJO Y ESTABLE)
+   =========================== */
+body::after {
+  content: "";
+  position: fixed;
+  inset: 0;
+
+  /* Fondo desktop */
   background-image: url("./assets/background2.png");
   background-size: var(--page-bg-size);
   background-position: var(--page-bg-position);
   background-repeat: no-repeat;
-  background-attachment: fixed; /* 🔒 fondo fijo */
 
-  position: relative;
-  overflow-x: hidden;
+  /* Capa detrás de todo */
+  z-index: -2;
+  pointer-events: none;
 }
 
 /* ===========================
@@ -128,7 +150,10 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
+
   background: var(--page-bg-overlay);
+
+  /* Por encima del fondo, por debajo del contenido */
   z-index: -1;
   pointer-events: none;
 }
@@ -137,26 +162,21 @@ body::before {
    RESPONSIVE BACKGROUND
    ================================================== */
 
-/* ≤900px
-   - Se cambia la imagen
-   - Se mantiene fondo FIJO
-   - El contenido es lo único que scrollea
-*/
+/* ≤900px: cambiamos la imagen (mobile) */
 @media (max-width: 900px) {
-  body {
+  body::after {
     background-image: url("./assets/background1.png");
-    background-attachment: fixed; /* MISMO COMPORTAMIENTO QUE DESKTOP */
   }
 }
 
-/* Mobile: leve reencuadre visual */
+/* ≤768px: leve reencuadre visual */
 @media (max-width: 768px) {
   :root {
     --page-bg-position: top center;
   }
 }
 
-/* Mobile chico */
+/* ≤420px: mantenemos el mismo encuadre */
 @media (max-width: 420px) {
   :root {
     --page-bg-position: top center;
