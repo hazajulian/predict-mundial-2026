@@ -1,0 +1,164 @@
+/* ===========================
+   GOOGLE FONT (1 sola vez)
+   =========================== */
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800;900&display=swap");
+
+/* ===========================
+   DESIGN TOKENS / VARIABLES
+   =========================== */
+:root {
+  /* ===========================
+     LAYOUT
+     =========================== */
+  --layout-max-width: 155rem;
+  --layout-padding-inline: 1.2rem;
+
+  /* ===========================
+     TYPOGRAPHY
+     =========================== */
+  --font-family-base: "Nunito", system-ui, -apple-system, BlinkMacSystemFont,
+    "Segoe UI", sans-serif;
+
+  /* ===========================
+     SECTION TITLES
+     =========================== */
+  --section-title-color: #ffffff;
+  --section-title-size-xl: 3.6rem;
+  --section-title-size-lg: 3rem;
+  --section-title-size-md: 2.7rem;
+  --section-title-weight: 900;
+
+  /* ===========================
+     TEXT COLORS
+     =========================== */
+  --color-text-main: #111111;
+  --color-text-muted: #4b5563;
+  --color-text-contrast: #ffffff;
+  --color-text-playoff-description: #cbcbcb;
+
+  /* ===========================
+     SURFACES
+     =========================== */
+  --color-surface: #ffffff;
+  --color-surface-soft: #f9fafb;
+
+  /* ===========================
+     HEADER / FOOTER
+     =========================== */
+  --color-header-bg: #111111;
+  --color-footer-bg: #111111;
+  --color-footer-text: #eeeeee;
+  --color-footer-link: #66ffcc;
+
+  /* ===========================
+     BORDERS / RADIUS / SHADOWS
+     =========================== */
+  --color-border-strong: #111111;
+  --radius-sm: 0.6rem;
+  --radius-md: 1rem;
+  --radius-lg: 1.4rem;
+  --shadow-soft: 0 1rem 2rem rgba(0, 0, 0, 0.15);
+
+  /* ===========================
+     ACTION COLORS
+     =========================== */
+  --action-green: #0e7f3b;
+  --action-green-hover: #11a24c;
+  --action-yellow: #c88a00;
+  --action-yellow-hover: #e2a61a;
+  --action-red: #b00000;
+  --action-red-hover: #d40000;
+
+  /* ===========================
+     FX
+     =========================== */
+  --transition-fast: 150ms ease-out;
+
+  /* ===========================
+     KNOCKOUT SEPARATORS (MOBILE)
+     =========================== */
+  --ko-phase-separator-width: 2px;
+  --ko-phase-separator-color: rgba(227, 227, 227, 0.8);
+
+  /* ===========================
+     BACKGROUND GLOBAL
+     =========================== */
+  --page-bg-size: cover;
+  --page-bg-position: center;
+  --page-bg-overlay: rgba(0, 0, 0, 0.45);
+}
+
+/* ===========================
+   RESET
+   =========================== */
+*,
+*::before,
+*::after {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+/* ===========================
+   BODY – BACKGROUND DESKTOP
+   =========================== */
+body {
+  font-family: var(--font-family-base);
+  line-height: 1.5;
+  color: var(--color-text-main);
+
+  background-image: url("./assets/background2.png");
+  background-size: var(--page-bg-size);
+  background-position: var(--page-bg-position);
+  background-repeat: no-repeat;
+  background-attachment: fixed; /* 🔒 fondo fijo */
+
+  position: relative;
+  overflow-x: hidden;
+}
+
+/* ===========================
+   OVERLAY OSCURO (FIJO)
+   =========================== */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background: var(--page-bg-overlay);
+  z-index: -1;
+  pointer-events: none;
+}
+
+/* ==================================================
+   RESPONSIVE BACKGROUND
+   ================================================== */
+
+/* ≤900px
+   - Se cambia la imagen
+   - Se mantiene fondo FIJO
+   - El contenido es lo único que scrollea
+*/
+@media (max-width: 900px) {
+  body {
+    background-image: url("./assets/background1.png");
+    background-attachment: fixed; /* MISMO COMPORTAMIENTO QUE DESKTOP */
+  }
+}
+
+/* Mobile: leve reencuadre visual */
+@media (max-width: 768px) {
+  :root {
+    --page-bg-position: top center;
+  }
+}
+
+/* Mobile chico */
+@media (max-width: 420px) {
+  :root {
+    --page-bg-position: top center;
+  }
+}

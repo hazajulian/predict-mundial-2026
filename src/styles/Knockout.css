@@ -1,0 +1,838 @@
+/* ==============================
+   CONTENEDOR Y HEADER
+   ============================== */
+
+.knockout-section {
+  max-width: 100%;
+  margin: 0 auto;
+}
+
+.ko-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+
+  margin: 2.4rem auto 1.6rem;
+  max-width: var(--layout-max-width);
+  padding-inline: var(--layout-padding-inline);
+}
+
+.ko-header__title {
+  font-family: var(--font-family-base);
+  font-size: var(--section-title-size-xl);
+  font-weight: var(--section-title-weight);
+  color: var(--section-title-color);
+}
+
+.ko-header__actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+/* ==============================
+   BOTONES KO (premium)
+   ============================== */
+
+.ko-button {
+  font-family: var(--font-family-base);
+  border: none;
+  border-radius: 999px;
+  padding: 0.55rem 1.1rem;
+
+  font-size: 1.45rem;
+  font-weight: 700;
+  cursor: pointer;
+
+  background: #111;
+  color: #fff;
+
+  transition: all 0.28s ease;
+  letter-spacing: 0.3px;
+
+  position: relative;
+  overflow: hidden;
+}
+
+.ko-button:hover {
+  transform: translateY(-2px) scale(1.03);
+  box-shadow: 0 5px 14px rgba(0, 0, 0, 0.25);
+}
+
+.ko-button::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 30% 50%, rgba(255, 255, 255, 0.18), transparent 70%);
+  opacity: 0;
+  transition: opacity 0.25s ease;
+}
+
+.ko-button:hover::after {
+  opacity: 1;
+}
+
+/* Colores */
+.ko-button--save {
+  background: var(--action-green);
+}
+.ko-button--save:hover {
+  background: var(--action-green-hover);
+  box-shadow: 0 6px 16px rgba(17, 162, 76, 0.45);
+}
+
+.ko-button--reset-ko {
+  background: var(--action-yellow);
+}
+.ko-button--reset-ko:hover {
+  background: var(--action-yellow-hover);
+  box-shadow: 0 6px 16px rgba(226, 166, 26, 0.45);
+}
+
+.ko-button--reset-all {
+  background: var(--action-red);
+}
+.ko-button--reset-all:hover {
+  background: var(--action-red-hover);
+  box-shadow: 0 6px 18px rgba(212, 0, 0, 0.55);
+}
+
+/* ==============================
+   MENSAJES DE ESTADO
+   ============================== */
+
+.ko-messages-row {
+  max-width: var(--layout-max-width);
+  margin: 0 auto 1.4rem;
+  padding-inline: var(--layout-padding-inline);
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+}
+
+.ko-save-message,
+.ko-reset-message {
+  font-family: var(--font-family-base);
+  font-size: 1.35rem;
+
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+
+  padding: 0.35rem 0.9rem;
+  border-radius: 999px;
+
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.22);
+  border: 1px solid rgba(0, 0, 0, 0.18);
+  background: #ffffffcc;
+  backdrop-filter: blur(4px);
+}
+
+.ko-message-dot {
+  display: inline-block;
+  width: 10px;
+  height: 10px;
+  border-radius: 999px;
+  background: currentColor;
+}
+
+/* ==============================
+   TOAST
+   ============================== */
+
+.ko-toast {
+  position: fixed;
+  top: 24px;
+  right: 24px;
+
+  padding: 0.75rem 1.2rem;
+  background: rgba(255, 255, 255, 0.65);
+  backdrop-filter: blur(10px);
+
+  border: 1.5px solid rgba(0, 0, 0, 0.18);
+  border-radius: 14px;
+
+  font-family: var(--font-family-base);
+  font-size: 1.35rem;
+  font-weight: 700;
+  color: #0b7a33;
+
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.22);
+  z-index: 9999;
+
+  opacity: 0;
+  transform: translateY(-18px);
+  animation: toastFade 0.45s ease forwards;
+}
+
+@keyframes toastFade {
+  from {
+    opacity: 0;
+    transform: translateY(-18px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ==============================
+   MODAL CONFIRMACIÓN
+   ============================== */
+
+.ko-modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.35);
+  backdrop-filter: blur(3px);
+
+  z-index: 10000;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  animation: fadeIn 0.3s ease forwards;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+.ko-modal {
+  background: rgba(255, 255, 255, 0.7);
+  backdrop-filter: blur(14px);
+
+  padding: 2rem;
+  border-radius: 18px;
+  width: min(420px, 90%);
+
+  border: 2px solid rgba(0, 0, 0, 0.2);
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.25);
+
+  font-family: var(--font-family-base);
+  animation: modalPop 0.35s ease forwards;
+}
+
+@keyframes modalPop {
+  from { opacity: 0; transform: scale(0.85); }
+  to { opacity: 1; transform: scale(1); }
+}
+
+.ko-modal-title {
+  font-size: 2rem;
+  font-weight: 900;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.ko-modal-text {
+  font-size: 1.3rem;
+  margin-bottom: 1.8rem;
+  text-align: center;
+}
+
+.ko-modal-buttons {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+}
+
+.ko-modal-btn {
+  padding: 0.55rem 1.2rem;
+  border-radius: 12px;
+  font-size: 1.3rem;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.ko-modal-btn--cancel {
+  background: #ccc;
+}
+.ko-modal-btn--cancel:hover {
+  background: #d7d7d7;
+}
+
+.ko-modal-btn--confirm {
+  background: var(--action-red);
+  color: #fff;
+}
+.ko-modal-btn--confirm:hover {
+  background: var(--action-red-hover);
+  box-shadow: 0 6px 18px rgba(212, 0, 0, 0.45);
+}
+
+/* ==============================
+   TROPHY
+   ============================== */
+
+.ko-trophy-wrapper {
+  width: 100%;
+  margin: 0 auto 1.8rem;
+  padding-inline: var(--layout-padding-inline);
+
+  display: flex;
+  justify-content: center;
+  pointer-events: none;
+}
+
+.ko-trophy {
+  display: block;
+  width: min(105px, 18vw) !important;
+  height: auto !important;
+  max-height: 260px;
+
+  border-radius: 26px;
+  padding: 0.4rem 0.8rem;
+
+  background: radial-gradient(circle at 30% 0, #fffdf0, #f7f7f7);
+  box-shadow: 0 10px 18px rgba(0, 0, 0, 0.25), 0 0 0 2px rgba(0, 0, 0, 0.55);
+}
+
+/* ==============================
+   GRID DESKTOP (ÁRBOL)
+   ============================== */
+
+.ko-grid-desktop {
+  margin-top: 0.5rem;
+  display: grid;
+  grid-template-columns: repeat(9, minmax(130px, 1fr));
+  padding-inline: 3rem;
+  align-items: center;
+  column-gap: 0.5rem;
+  row-gap: 0.5rem;
+}
+
+.ko-round-column {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 0.5rem;
+  justify-content: space-between;
+}
+
+.ko-round-column[data-round="16vos"] {
+  justify-content: space-between;
+  margin-right: 0.5rem;
+}
+
+.ko-round-column[data-round="8vos"] {
+  gap: 8rem;
+  margin-inline: 0.5rem;
+}
+
+.ko-round-column[data-round="4tos"] {
+  gap: 2rem;
+  margin-inline: 0.5rem;
+}
+
+.ko-round-column[data-round="Semis"] {
+  margin-inline: 0.5rem;
+}
+
+.ko-round-column--center {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  margin-inline: 0.5rem;
+  gap: 1.3rem;
+  margin-bottom: 10rem;
+}
+
+/* ==============================
+   GRID MOBILE/TABLET (FASES)
+   ============================== */
+
+.ko-grid-mobile {
+  display: none;
+}
+
+/* ==============================
+   TARJETAS KO
+   ============================== */
+
+.ko-card {
+  background: #ffffff;
+  border-radius: 14px;
+  padding: 0.6rem 0.8rem;
+  font-size: 1.2rem;
+  border: 2px solid #000;
+  box-shadow: 0 3px 6px rgba(0, 0, 0, 0.18);
+}
+
+.ko-card-header {
+  font-family: var(--font-family-base);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.25rem;
+  font-weight: 600;
+}
+
+.ko-round-label {
+  font-size: 1.3rem;
+}
+
+.ko-toggle {
+  width: 22px;
+  height: 22px;
+  border-radius: 999px;
+  border: 1px solid #bbb;
+  background: #f5f5f5;
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  padding: 0;
+  line-height: 1;
+  font-size: 0.9rem;
+}
+
+.ko-toggle-icon {
+  transform: translateY(-1px);
+}
+
+.ko-toggle--active {
+  cursor: pointer;
+  background: #ffffff;
+}
+
+.ko-toggle--active:hover {
+  background: #e5f4ff;
+  border-color: #0077c8;
+}
+
+.ko-toggle--disabled {
+  cursor: default;
+  opacity: 0.4;
+}
+
+/* Equipos */
+.ko-teams {
+  font-family: var(--font-family-base);
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  font-weight: 600;
+}
+
+.ko-team-row {
+  display: flex;
+  align-items: center;
+  gap: 0.45rem;
+}
+
+.ko-team-row--winner {
+  background: #e5f4ff;
+  box-shadow: inset 3px 0 0 #0077c8;
+  border-radius: 6px;
+}
+
+.ko-team-row--winner .ko-team-name {
+  font-weight: 700;
+}
+
+.ko-team-name {
+  flex: 1;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font-size: 1.3rem;
+}
+
+.ko-score-box {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.ko-score-box--winner {
+  font-weight: 700;
+}
+
+/* Banderas */
+.ko-flag {
+  width: 34px;
+  height: 22px;
+  border-radius: 3px;
+  border: 1px solid #000;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+  object-fit: cover;
+  flex-shrink: 0;
+}
+
+.ko-flag-placeholder {
+  width: 34px;
+  height: 22px;
+  border-radius: 3px;
+  background-color: #e3e3e3;
+  border: 1px solid #000;
+  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.35);
+  flex-shrink: 0;
+}
+
+/* Inputs principales */
+.ko-score-input {
+  width: 3rem;
+  height: 2rem;
+  text-align: center;
+  font-size: 1.15rem;
+
+  border-radius: 10px;
+  border: 1.5px solid #b5b5b5;
+  background: #fafafa;
+
+  box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.15);
+  transition: all 0.15s ease;
+}
+
+.ko-score-input:hover {
+  background: #f0f0f0;
+}
+
+.ko-score-input:focus {
+  outline: none;
+  border-color: #0077c8;
+  background: #ffffff;
+  box-shadow: 0 0 4px rgba(0, 119, 200, 0.6);
+}
+
+.ko-team-row--winner .ko-score-input {
+  font-weight: 800;
+  color: #000;
+}
+
+/* Alargue y penales */
+.ko-extra-block {
+  margin-top: 0.4rem;
+  padding-top: 0.3rem;
+  border-top: 1px dashed #ccc;
+  font-size: 0.9rem;
+}
+
+.ko-extra-title {
+  font-weight: 600;
+  margin-bottom: 0.2rem;
+}
+
+.ko-extra-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.5rem;
+  margin-top: 0.2rem;
+}
+
+.ko-extra-team {
+  font-size: 0.9rem;
+  max-width: 40%;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ko-extra-team--right {
+  text-align: right;
+}
+
+.ko-extra-team-short {
+  max-width: 80px;
+  font-size: 0.9rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ko-extra-separator {
+  font-size: 0.95rem;
+  margin: 0 0.1rem;
+}
+
+/* Resumen */
+.ko-result {
+  margin-top: 0.35rem;
+  font-size: 1.1rem;
+  color: #555;
+}
+
+/* ==============================
+   PODIO
+   ============================== */
+
+.ko-podium {
+  margin: 2.6rem auto 0;
+  padding: 1.4rem 1.2rem 0.6rem;
+  max-width: var(--layout-max-width);
+
+  border-top: var(--ko-phase-separator-width) solid var(--ko-phase-separator-color);
+  background: transparent;
+  box-shadow: none;
+  border-radius: 0;
+}
+
+.ko-podium__title {
+  font-family: var(--font-family-base);
+  font-size: var(--section-title-size-lg);
+  font-weight: var(--section-title-weight);
+  margin-bottom: 1.2rem;
+  color: var(--section-title-color);
+}
+
+.ko-podium__list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  display: flex;
+  flex-wrap: wrap;
+  gap: 1.1rem;
+  justify-content: center;
+}
+
+.ko-podium__item {
+  min-width: 300px;
+  max-width: 300px;
+  height: 120px;
+
+  padding: 0.9rem 1.1rem 1.1rem;
+
+  border-radius: 16px;
+  border: 2px solid #000;
+  box-shadow: 0 3px 8px rgba(0, 0, 0, 0.22);
+
+  font-size: 1.4rem;
+  font-family: var(--font-family-base);
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+.ko-podium__item:nth-child(1) {
+  background: linear-gradient(145deg, #fff8d5, #ffe58f);
+}
+.ko-podium__item:nth-child(2) {
+  background: linear-gradient(145deg, #edf2ff, #dde5ff);
+}
+.ko-podium__item:nth-child(3) {
+  background: linear-gradient(145deg, #ffece0, #ffd5b8);
+}
+
+.ko-podium-flag,
+.ko-podium__flag,
+.ko-podium__item img {
+  width: 90px;
+  height: 50px;
+  border-radius: 6px;
+  border: 1px solid #000;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+  object-fit: cover;
+  margin-bottom: 0.4rem;
+}
+
+.ko-podium__text {
+  flex: 0 0 auto;
+  max-width: 100%;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+}
+
+/* ==============================
+   COMPACTO KO (1280–1599)
+   ============================== */
+
+@media (min-width: 1280px) and (max-width: 1599px) {
+  .ko-team-name {
+    display: none;
+  }
+
+  .ko-team-row {
+    justify-content: space-between;
+  }
+}
+
+/* ==============================
+   BREAKPOINTS
+   ============================== */
+
+@media (max-width: 1279px) {
+  .knockout-section {
+    padding-inline: 0.75rem;
+  }
+
+  .ko-trophy {
+    max-width: 60px;
+    height: auto;
+  }
+
+  .ko-grid-desktop {
+    display: none;
+  }
+
+  .ko-grid-mobile {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    margin-top: 1rem;
+    max-width: 1200px;
+    margin-inline: auto;
+    padding-inline: 0.5rem;
+  }
+
+  .ko-phase {
+    padding-inline: 0.5rem;
+    padding-bottom: 1.2rem;
+  }
+
+  /* Separador ENTRE fases (controlable por variables) */
+  .ko-phase + .ko-phase {
+    margin-top: 1.4rem;
+    padding-top: 1.4rem;
+    border-top: var(--ko-phase-separator-width) solid var(--ko-phase-separator-color);
+  }
+
+  .ko-phase__title {
+    font-size: 2rem;
+    font-weight: 900;
+    margin-bottom: 0.8rem;
+    font-family: var(--font-family-base);
+    text-align: left;
+    color: var(--section-title-color);
+  }
+
+  .ko-phase__content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 0.75rem;
+  }
+
+  .ko-phase__trophy {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+  }
+
+  .ko-phase__grid {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 0.75rem;
+    max-width: 1000px;
+    margin-inline: auto;
+    padding-inline: 1rem;
+  }
+
+  .ko-phase__grid > .ko-card {
+    flex: 1 1 230px;
+    max-width: 260px;
+  }
+
+  .ko-phase--with-trophy .ko-phase__grid {
+    justify-content: flex-start;
+    margin-inline: 0;
+    padding-inline: 0;
+  }
+
+  .ko-phase--with-trophy .ko-phase__grid > .ko-card {
+    flex: 0 0 auto;
+    max-width: 260px;
+  }
+
+  .ko-podium {
+    margin-top: 2rem;
+  }
+}
+
+@media (max-width: 900px) {
+  .ko-phase__grid > .ko-card {
+    flex: 1 1 260px;
+    max-width: 280px;
+  }
+
+  .ko-podium__list {
+    justify-content: center;
+  }
+
+  .ko-podium__item {
+    min-width: 190px;
+    max-width: 100%;
+  }
+}
+
+@media (max-width: 830px) {
+  .ko-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.8rem;
+  }
+
+  .ko-header__actions {
+    width: 100%;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    row-gap: 0.4rem;
+  }
+
+  .ko-header__actions .ko-button {
+    flex: 0 0 auto;
+  }
+}
+
+@media (max-width: 600px) {
+  .ko-trophy-img {
+    max-height: 190px;
+  }
+
+  .ko-phase__grid > .ko-card {
+    flex: 1 1 280px;
+    max-width: 320px;
+  }
+
+  .ko-podium {
+    padding-inline: 1rem;
+  }
+
+  .ko-podium__title {
+    text-align: center;
+  }
+
+  .ko-podium__list {
+    justify-content: center;
+  }
+
+  .ko-podium__item {
+    width: 100%;
+    max-width: 260px;
+  }
+}
+
+@media (max-width: 420px) {
+  .ko-phase__grid > .ko-card {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+
+  .ko-trophy-img {
+    max-height: 170px;
+  }
+
+  .ko-header {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .ko-header__actions {
+    width: 100%;
+  }
+}

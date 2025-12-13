@@ -1,0 +1,119 @@
+/* ===========================
+   SECCIÓN RESUMEN / AWARDS
+   =========================== */
+
+.awards-section {
+  margin: 2.4rem auto 3.2rem;
+  max-width: var(--layout-max-width);
+  padding-inline: var(--layout-padding-inline);
+}
+
+.awards-title {
+  font-family: var(--font-family-base);
+  font-size: var(--section-title-size-md);
+  font-weight: var(--section-title-weight);
+  color: var(--section-title-color);
+  margin-bottom: 0.4rem;
+}
+
+/* ===========================
+   CONTENEDOR DE TARJETAS
+   =========================== */
+
+.awards-row {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1.6rem;
+  margin-top: 1.6rem;
+  padding-inline: 2rem;
+}
+
+/* ===========================
+   TARJETA INDIVIDUAL
+   =========================== */
+
+.award-card {
+  background: linear-gradient(135deg, #fff9e6, #ffffff);
+  border-radius: 1.6rem;
+  border: 2px solid #eadfb3;
+  box-shadow: 0 8px 18px rgba(0, 0, 0, 0.06);
+  padding: 1.6rem 1.4rem 1.8rem;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+}
+
+/* Logo tipo “podio” */
+.award-logo {
+  width: 90px;
+  height: 50px;
+  background: #ffffff;
+  border-radius: 6px;
+  border: 1px solid #000;
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.4);
+
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  overflow: hidden;
+  margin-bottom: 0.9rem;
+}
+
+.award-logo img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Texto */
+.award-title {
+  font-family: var(--font-family-base);
+  font-size: 1.45rem;
+  font-weight: 800;
+  color: #333;
+  margin-bottom: 0.4rem;
+}
+
+.award-team {
+  font-family: var(--font-family-base);
+  font-size: 1.4rem;
+  font-weight: 600;
+  color: var(--color-text-main);
+}
+
+/* ===========================
+   RESPONSIVE
+   =========================== */
+
+@media (max-width: 1024px) {
+  .awards-row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    gap: 1.2rem;
+  }
+
+  .award-card {
+    flex: 0 1 300px;
+    max-width: 320px;
+    width: 100%;
+  }
+}
+
+@media (max-width: 640px) {
+  .awards-section {
+    margin-top: 1.8rem;
+  }
+
+  .awards-row {
+    justify-content: center;
+  }
+
+  .award-card {
+    flex: 0 1 100%;
+    max-width: 360px;
+  }
+}

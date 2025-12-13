@@ -1,0 +1,152 @@
+/* ===========================
+   HEADER
+   =========================== */
+
+.app-header {
+  width: 100%;
+  padding: 1.8rem 2.4rem 1.4rem;
+  background-color: var(--color-header-bg);
+  border-bottom: 1px solid var(--color-header-bg);
+
+  display: flex;
+  flex-direction: column;
+  gap: 1.4rem;
+
+  color: var(--color-text-contrast);
+  font-family: var(--font-family-base);
+}
+
+.app-header__title-block {
+  display: flex;
+  flex-direction: column;
+  gap: 0.4rem;
+}
+
+.app-header__title {
+  font-size: 3rem;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--color-text-contrast);
+  font-weight: 700;
+}
+
+.app-header__subtitle {
+  font-size: 1.5rem;
+  color: #f3f4f6;
+  font-weight: 400;
+}
+
+/* ===========================
+   NAVBAR
+   =========================== */
+
+.app-nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.8rem;
+}
+
+.app-nav__button {
+  padding: 0.7rem 1.6rem;
+  border-radius: 999px;
+  border: 1px solid #16a34a;
+
+  font-size: 1.1rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.08em;
+
+  background-color: #ffffff;
+  color: #000000;
+
+  cursor: pointer;
+  transition:
+    background-color 150ms ease,
+    transform 150ms ease,
+    box-shadow 150ms ease;
+}
+
+.app-nav__button:hover {
+  background-color: rgb(173, 173, 173);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.5);
+  transform: translateY(-1px);
+}
+
+.app-nav__button:active {
+  transform: translateY(0);
+  box-shadow: none;
+}
+
+/* Predicción */
+.app-nav__button--predict {
+  background-color: #16a34a;
+  border-color: #16a34a;
+  color: #ffffff;
+}
+
+.app-nav__button--predict:hover {
+  background-color: #22c55e;
+  box-shadow: 0 4px 12px rgba(22, 163, 74, 0.6);
+}
+
+/* Desktop grande: Info empuja a la derecha */
+.app-nav__button--info {
+  margin-left: auto;
+}
+
+/* Idioma */
+.app-nav__button--lang {
+  background-color: #ffffff;
+  border-color: #16a34a;
+  color: #000000;
+}
+
+/* ===========================
+   FIX REAL (769px–882px)
+   =========================== */
+
+@media (min-width: 769px) and (max-width: 882px) {
+  .app-nav__button--info {
+    margin-left: 0;
+    order: 100;
+    flex-grow: 0;
+    width: auto;
+  }
+
+  .app-nav__button--lang {
+    order: 101;
+  }
+}
+
+/* ===========================
+   MOBILE
+   =========================== */
+
+@media (max-width: 768px) {
+  .app-header {
+    padding: 1.4rem 1.2rem 1.2rem;
+  }
+
+  .app-header__title {
+    font-size: 2.2rem;
+  }
+
+  .app-nav {
+    gap: 0.6rem;
+  }
+
+  .app-nav__button {
+    font-size: 1.2rem;
+    padding: 0.6rem 1.2rem;
+  }
+
+  .app-nav__button--info {
+    margin-left: 0;
+    order: 100;
+  }
+
+  .app-nav__button--lang {
+    order: 101;
+  }
+}
