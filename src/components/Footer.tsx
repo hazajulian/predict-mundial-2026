@@ -21,7 +21,7 @@ export function Footer({ language }: FooterProps) {
         <p className="app-footer__text">
           © {new Date().getFullYear()} {t.header.title} —{" "}
           <a
-            href="https://github.com/tu-usuario"
+            href="https://github.com/hazajulian/predict-mundial-2026?tab=readme-ov-file"
             target="_blank"
             rel="noopener noreferrer"
             className="app-footer__link"
