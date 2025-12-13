@@ -15,7 +15,6 @@ import { getRank } from "../utils/autoPrediction";
 import { resolvePlayoffTeam, type PlayoffSelection } from "../utils/resolvePlayoffTeams";
 
 import type {
-  EMPTY_SCORE,
   KnockoutMatch,
   KnockoutScore,
   KnockoutScoreKey,

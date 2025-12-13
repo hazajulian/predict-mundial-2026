@@ -1,5 +1,5 @@
 // src/context/PredictionContext.tsx
-import { createContext, useContext, useEffect, useState, type ReactNode } from "react";
+import { createContext, useContext, useState, type ReactNode } from "react";
 
 import type { PlayoffSlotId } from "../data/playoffTeams";
 import {
@@ -46,16 +46,6 @@ function safeReadPlayoffFromLS(): PlayoffSelection {
     return { ...INITIAL_PLAYOFF_SELECTION, ...parsed };
   } catch {
     return INITIAL_PLAYOFF_SELECTION;
-  }
-}
-
-function safeWritePlayoffToLS(state: PlayoffSelection) {
-  if (typeof window === "undefined") return;
-
-  try {
-    window.localStorage.setItem(LS_PLAYOFF_KEY, JSON.stringify(state));
-  } catch {
-    /* Ignore storage errors (private mode, quota, etc.). */
   }
 }
 
