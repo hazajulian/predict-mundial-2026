@@ -1,0 +1,4 @@
+User-agent: *
+Allow: /
+
+Sitemap: https://predict-mundial-2026-od3k.vercel.app/sitemap.xml
