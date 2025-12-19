@@ -104,12 +104,12 @@ html {
 }
 
 /* ==================================================
-   BACKGROUND PRO (SIN "background-attachment: fixed")
+   BACKGROUND (2 MODOS)
    ==================================================
-   IMPORTANTE:
-   - En móviles, background-attachment: fixed es inestable (tiembla / se mueve).
-   - La solución PRO es renderizar el fondo en un pseudo-elemento FIXED.
-   - Así el contenido scrollea, pero el fondo nunca se mueve.
+   OBJETIVO:
+   - Desktop: background normal con attachment fixed (estable en PC).
+   - Mobile: NO usar attachment fixed (tiembla en móviles).
+            Usar pseudo-elemento FIXED con altura 100lvh (NO cambia al scrollear).
 */
 
 /* ===========================
@@ -122,34 +122,15 @@ body {
 
   position: relative;
   overflow-x: hidden;
-}
 
-/* ===========================
-   FONDO REAL (FIJO Y ESTABLE)
-   =========================== */
-body::after {
-  content: "";
-  position: fixed;
-  inset: 0;
-
-  /* FIX MOBILE: evita el “zoom”/recalculo cuando cambia el alto del viewport (barra del navegador) */
-  width: 100vw;
-  height: 100vh; /* fallback */
-  height: 100svh; /* viewport estable (iOS/Android modernos) */
-  height: 100dvh; /* viewport dinámico (mejor en Chrome moderno) */
-
-  /* Fondo desktop */
+  /* ===========================
+     BACKGROUND DESKTOP
+     =========================== */
   background-image: url("./assets/background2.png");
   background-size: var(--page-bg-size);
   background-position: var(--page-bg-position);
   background-repeat: no-repeat;
-
-  /* Extra estabilidad (anti-jitter / anti flicker) */
-  transform: translateZ(0);
-
-  /* Capa detrás de todo */
-  z-index: -2;
-  pointer-events: none;
+  background-attachment: fixed; /* OK en desktop */
 }
 
 /* ===========================
@@ -160,12 +141,6 @@ body::before {
   position: fixed;
   inset: 0;
 
-  /* FIX MOBILE: mismo tratamiento que el fondo para que nunca “bombee” */
-  width: 100vw;
-  height: 100vh; /* fallback */
-  height: 100svh; /* viewport estable */
-  height: 100dvh; /* viewport dinámico */
-
   background: var(--page-bg-overlay);
 
   /* Por encima del fondo, por debajo del contenido */
@@ -174,13 +149,47 @@ body::before {
 }
 
 /* ==================================================
-   RESPONSIVE BACKGROUND
-   ================================================== */
+   RESPONSIVE BACKGROUND (MOBILE PRO)
+   ==================================================
+   IMPORTANTE:
+   - En móviles, el viewport “cambia” al scrollear por la barra del navegador.
+   - 100dvh cambia (=> “zoom” / “bombeo”).
+   - 100lvh es el alto máximo estable => el fondo NO respira.
+*/
 
-/* ≤900px: cambiamos la imagen (mobile) */
+/* ≤900px: apagamos fondo de body y usamos pseudo-elemento fijo */
 @media (max-width: 900px) {
+  body {
+    /* Evita el “bombeo” del background del body en mobile */
+    background: none;
+    background-attachment: initial;
+  }
+
+  /* FONDO REAL (FIJO Y ESTABLE EN MOBILE) */
   body::after {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+
+    width: 100vw;
+
+    /* CLAVE: altura estable (no cambia al mostrar/ocultar la barra del navegador) */
+    height: 100vh; /* fallback */
+    height: 100lvh; /* anti-zoom real (viewport máximo) */
+
     background-image: url("./assets/background1.png");
+    background-size: var(--page-bg-size);
+    background-position: var(--page-bg-position);
+    background-repeat: no-repeat;
+
+    /* Capa detrás de todo */
+    z-index: -2;
+    pointer-events: none;
+
+    /* Extra estabilidad */
+    transform: translateZ(0);
+    will-change: transform;
   }
 }
 
