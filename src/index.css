@@ -132,11 +132,20 @@ body::after {
   position: fixed;
   inset: 0;
 
+  /* FIX MOBILE: evita el “zoom”/recalculo cuando cambia el alto del viewport (barra del navegador) */
+  width: 100vw;
+  height: 100vh; /* fallback */
+  height: 100svh; /* viewport estable (iOS/Android modernos) */
+  height: 100dvh; /* viewport dinámico (mejor en Chrome moderno) */
+
   /* Fondo desktop */
   background-image: url("./assets/background2.png");
   background-size: var(--page-bg-size);
   background-position: var(--page-bg-position);
   background-repeat: no-repeat;
+
+  /* Extra estabilidad (anti-jitter / anti flicker) */
+  transform: translateZ(0);
 
   /* Capa detrás de todo */
   z-index: -2;
@@ -150,6 +159,12 @@ body::before {
   content: "";
   position: fixed;
   inset: 0;
+
+  /* FIX MOBILE: mismo tratamiento que el fondo para que nunca “bombee” */
+  width: 100vw;
+  height: 100vh; /* fallback */
+  height: 100svh; /* viewport estable */
+  height: 100dvh; /* viewport dinámico */
 
   background: var(--page-bg-overlay);
 
